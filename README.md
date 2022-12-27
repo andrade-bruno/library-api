@@ -1,1 +1,1 @@
-# libray-api
+# library-api
