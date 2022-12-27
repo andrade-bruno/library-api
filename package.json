@@ -1,0 +1,25 @@
+{
+  "name": "library-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"start": "nodemon server.js",
+	"debug": "nodemon --inspect server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrade-bruno/library-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrade-bruno/library-api/issues"
+  },
+  "homepage": "https://github.com/andrade-bruno/library-api#readme",
+  "dependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
