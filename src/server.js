@@ -1,25 +1,18 @@
 import express from 'express'
+import db from './db.connect.js'
+import books from './models/books.js'
 
 const server = express()
 server.use(express.json())
-
-const books = [
-	{
-		id: 1,
-		title: 'Lord of rings'
-	},
-	{
-		id: 2,
-		title: 'Hobbit'
-	}
-]
 
 server.get('/', (req, res) => {
 	res.status(200).send('Node course')
 })
 
 server.get('/books', (req, res) => {
-	res.status(200).json(books)
+	books.find((error, books) => {
+		res.status(200).json(books)
+	})
 })
 
 server.get('/books/:id', (req, res) => {

@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/andrade-bruno/library-api#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "6.2.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
