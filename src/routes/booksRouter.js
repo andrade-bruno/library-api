@@ -6,5 +6,6 @@ const BooksRouter = express.Router()
 BooksRouter
 	.get('/books', BookController.getAllBooks)
 	.post('/books', BookController.createBook)
+	.put('/books/:id', BookController.updateBook)
 
 export default BooksRouter
