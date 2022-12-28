@@ -9,12 +9,12 @@ class BookController {
 
 	static getBookById = (req, res) => {
 		const id = req.params.id
-		
+
 		BookModel.findById(id, (error, book) => {
 			if (!error) {
 				res.status(200).json(book)
 			} else {
-				res.status(404).send({ message: `Could'nd find book ${id}`, error: error.message})
+				res.status(404).send({ message: `Could'nt find book ${id}`, error: error.message})
 			}
 		})
 	}
@@ -36,9 +36,21 @@ class BookController {
 		
 		BookModel.findByIdAndUpdate(id, {$set: req.body}, (error, doc) => {
 			if (!error) {
-				res.status(200).json({ message: `Book ${id} updated successfully` })
+				res.status(200).json({ message: `Book updated successfully` })
 			} else {
 				res.status(500).json({ message: `Could'nt update book ${id}`, error: error.message })
+			}
+		})
+	}
+
+	static deleteBook = (req, res) => {
+		const id = req.params.id
+
+		BookModel.findByIdAndDelete(id, (error) => {
+			if (!error) {
+				res.status(200).send({ message: `Book deleted successfully`})
+			} else {
+				res.status(500).json({ message: `Could'nt delete book ${id}`, error: error.message })
 			}
 		})
 	}
