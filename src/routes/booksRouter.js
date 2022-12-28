@@ -1,8 +1,10 @@
 import express from 'express'
-import BookController from '../controllers/book.js'
+import BookController from '../controllers/BookController.js'
 
-const booksRouter = express.Router()
+const BooksRouter = express.Router()
 
-booksRouter.get('/books', BookController.getAllBooks)
+BooksRouter
+	.get('/books', BookController.getAllBooks)
+	.post('/books', BookController.createBook)
 
-export default booksRouter
+export default BooksRouter

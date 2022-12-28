@@ -1,5 +1,5 @@
 import express from 'express'
-import booksRouter from './booksRouter.js'
+import BooksRouter from './BooksRouter.js'
 
 const routes = (server) => {
 	server.route('/').get((req, res) => {
@@ -8,7 +8,7 @@ const routes = (server) => {
 
 	server.use(
 		express.json(),
-		booksRouter
+		BooksRouter
 	)
 }
 

@@ -1,6 +1,6 @@
 import express from 'express'
 import db from './config/db.connect.js'
-import books from './models/books.js'
+import books from './models/BookModel.js'
 import routes from './routes/index.js'
 
 const server = express()
@@ -14,27 +14,6 @@ server.get('/books/:id', (req, res) => {
 		res.status(200).json({ ...books[idx] })
 	} else {
 		res.status(404).json({ message: `Book #${id} not found` })
-	}
-})
-
-server.post('/books', (req, res) => {
-	let book = req.body
-	const hasBook = books.some(item => (
-		item.title.toLowerCase().includes(book.title.toLowerCase())
-	))
-	if (!hasBook) {
-		book = {
-			id: books.length + 1,
-			...book
-		}
-		books.push(book)
-		res.status(201).json({
-			message: 'Book created successfully', book: { ...book }
-		})
-	} else {
-		res.status(406).json({
-			message: `Book '${req.body.title}' already exists`
-		})
 	}
 })
 

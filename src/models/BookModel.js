@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-const booksSchema = new mongoose.Schema({
+const BookSchema = new mongoose.Schema({
 	id: {
 		type: String
 	},
@@ -24,6 +24,6 @@ const booksSchema = new mongoose.Schema({
 	}
 })
 
-const books = mongoose.model('books', booksSchema)
+const BookModel = mongoose.model('books', BookSchema)
 
-export default books
+export default BookModel
