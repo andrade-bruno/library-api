@@ -1,19 +1,11 @@
 import express from 'express'
 import db from './config/db.connect.js'
 import books from './models/books.js'
+import routes from './routes/index.js'
 
 const server = express()
 server.use(express.json())
-
-server.get('/', (req, res) => {
-	res.status(200).send('Node course')
-})
-
-server.get('/books', (req, res) => {
-	books.find((error, books) => {
-		res.status(200).json(books)
-	})
-})
+routes(server)
 
 server.get('/books/:id', (req, res) => {
 	const id = req.params.id
