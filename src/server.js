@@ -1,5 +1,5 @@
 import express from 'express'
-import db from './db.connect.js'
+import db from './config/db.connect.js'
 import books from './models/books.js'
 
 const server = express()
