@@ -7,6 +7,18 @@ class BookController {
 		})
 	}
 
+	static getBookById = (req, res) => {
+		const id = req.params.id
+		
+		BookModel.findById(id, (error, book) => {
+			if (!error) {
+				res.status(200).json(book)
+			} else {
+				res.status(404).send({ message: `Could'nd find book ${id}`, error: error.message})
+			}
+		})
+	}
+
 	static createBook = (req, res) => {
 		let book = new BookModel(req.body)
 
@@ -14,7 +26,7 @@ class BookController {
 			if (!error) {
 				res.status(201).send({ message: 'Book created successfully', book: { ...book.toJSON() } })
 			} else {
-				res.status(500).send({ message: `Could'nt create the book`, error: `${error.message}` })
+				res.status(500).send({ message: `Could'nt create the book`, error: error.message })
 			}
 		})
 	}
@@ -26,7 +38,7 @@ class BookController {
 			if (!error) {
 				res.status(200).json({ message: `Book ${id} updated successfully` })
 			} else {
-				res.status(500).json({ message: `Could'nt update book ${id}`, error: `${error.message}` })
+				res.status(500).json({ message: `Could'nt update book ${id}`, error: error.message })
 			}
 		})
 	}

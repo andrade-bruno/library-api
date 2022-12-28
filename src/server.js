@@ -12,16 +12,6 @@ server.use(express.json())
 
 routes(server)
 
-server.get('/books/:id', (req, res) => {
-	const id = req.params.id
-	const idx = findBook(id)
-	if (books[idx]) {
-		res.status(200).json({ ...books[idx] })
-	} else {
-		res.status(404).json({ message: `Book #${id} not found` })
-	}
-})
-
 server.delete('/books/:id', (req, res) => {
 	const id = req.params.id
 	const idx = findBook(id)
