@@ -2,21 +2,27 @@ import BookModel from "../models/BookModel.js"
 
 class BookController {
 	static getAllBooks = (req, res) => {
-		BookModel.find((error, books) => {
-			res.status(200).json(books)
-		})
+		BookModel
+			.find()
+			.populate('author')
+			.exec((error, books) => {
+				res.status(200).json(books)
+			})
 	}
 
 	static getBookById = (req, res) => {
 		const id = req.params.id
 
-		BookModel.findById(id, (error, book) => {
-			if (!error) {
-				res.status(200).json(book)
-			} else {
-				res.status(404).send({ message: `Could'nt find book ${id}`, error: error.message })
-			}
-		})
+		BookModel
+			.findById(id)
+			.populate('author', ['name', 'nationality']) // Gathering only specific fields
+			.exec((error, book) => {
+				if (!error) {
+					res.status(200).json(book)
+				} else {
+					res.status(404).send({ message: `Could'nt find book ${id}`, error: error.message })
+				}
+			})
 	}
 
 	static createBook = (req, res) => {
@@ -24,7 +30,12 @@ class BookController {
 
 		book.save((error) => {
 			if (!error) {
-				res.status(201).json({ message: 'Book created successfully', book })
+				BookModel
+					.findById(book._id)
+					.populate('author')
+					.exec((error, item) => {
+						if (!error) res.status(201).json({ message: 'Book created successfully', book: item })
+					})
 			} else {
 				res.status(500).send({ message: `Could'nt create the book`, error: error.message })
 			}
@@ -36,7 +47,12 @@ class BookController {
 
 		BookModel.findByIdAndUpdate(id, { $set: req.body }, (error, doc) => {
 			if (!error) {
-				res.status(200).json({ message: `Book updated successfully` })
+				BookModel
+					.findById(id)
+					.populate('author')
+					.exec((error, item) => {
+						if (!error) res.status(200).json({ message: `Book updated successfully`, book: item })
+					})
 			} else {
 				res.status(500).json({ message: `Could'nt update book ${id}`, error: error.message })
 			}
