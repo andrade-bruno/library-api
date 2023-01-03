@@ -70,6 +70,16 @@ class BookController {
 			}
 		})
 	}
+
+	static getBooksByPublishingCompany = (req, res) => {
+		const publishingCompany = req.query.publishingCompany
+
+		BookModel.find(
+			{ 'publishingCompany': publishingCompany }, {}, (error, books) => {
+				res.status(200).json(books)
+			}
+		)
+	}
 }
 
 export default BookController
