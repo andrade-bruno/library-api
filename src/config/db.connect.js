@@ -3,7 +3,7 @@ dotenv.config();
 
 import mongoose from "mongoose"
 
-mongoose.connect(process.env.CONNECTION_STRING)
+mongoose.connect(process.env.CONNECTION_STRING + process.env.DEFAULT_COLLECTION)
 
 let db = mongoose.connection
 

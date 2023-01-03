@@ -18,6 +18,6 @@ const AuthorSchema = new mongoose.Schema(
 	}
 )
 
-const Authors = mongoose.models('authors', AuthorSchema)
+const AuthorModel = mongoose.model('authors', AuthorSchema)
 
-export default Authors
+export default AuthorModel
